@@ -1,1 +1,5 @@
-<%= @mentions %>
+<br />
+<% @artists.each do |artist| %>
+  <div><%= artist.foreign_ids[0].attrs[:foreign_id] %></div>
+<% end %>
+
