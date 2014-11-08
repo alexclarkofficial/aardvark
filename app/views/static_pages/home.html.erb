@@ -5,6 +5,8 @@ hey
 
 <br />
 <% @result.each do |tweet| %>
-  <div><%= tweet.text %></div>
+  <% tweet.user_mentions.each do |mention| %>
+    <div><%= mention.attrs[:screen_name] %></div>
+  <% end %>
   <br />
 <% end %>
