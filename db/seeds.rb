@@ -5,3 +5,17 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+TwitterUser.destroy_all
+Song.destroy_all
+
+user1 = TwitterUser.create(
+    handle:'@test_handle',
+    name:'@test_name'
+)
+song1 = Song.create([
+    {
+        rdio_id:'ASDF2134',
+        twitter_user: user1
+    }
+])
