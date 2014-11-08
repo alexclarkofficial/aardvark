@@ -1,4 +1,10 @@
 hey
 <% @search_results.each do |res| %>
-<div><%= res.title %></div>
+  <div><%= res.title %></div>
+<% end %>
+
+<br />
+<% @result.each do |tweet| %>
+  <div><%= tweet.text %></div>
+  <br />
 <% end %>
