@@ -2,7 +2,7 @@ class TwitterUsersController < ApplicationController
   respond_to :json
 
   def show
-    @user = TwitterUser.where(handle: params[:user_name]).first
+    @user = TwitterUser.find(:first, :conditions => ["lower(handle) = ?", params[:user_name].downcase])
     if @user.nil?
       twitter_call
       @artists = possible_artists(twitter_mentions).select do |name|
