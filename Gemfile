@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
 
+gem 'active_model_serializers'
+
 # Use pg as the database for Active Record
 gem 'pg'
 
@@ -35,7 +37,7 @@ group :doc do
 end
 
 gem 'twitter'
-
+gem 'pry'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

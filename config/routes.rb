@@ -1,6 +1,6 @@
 Aardvark::Application.routes.draw do
   get '/' => 'static_pages#home'
-  get '/:user_name' => 'static_pages#user'
+  get '/:user_name' => 'static_pages#handle'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
