@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   end
 
   def possible_artists(names)
-    names[0..19].map do |artist|
+    names[0..149].map do |artist|
       Echowrap.artist_search(name: artist, bucket: 'id:rdio-US').first
     end.compact
   end
