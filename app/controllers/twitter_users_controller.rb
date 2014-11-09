@@ -6,12 +6,12 @@ class TwitterUsersController < ApplicationController
     if @user.nil?
       twitter_call(params[:user_name])
       @artists = possible_artists(twitter_mentions).select do |name|
-        is_artist?(name)
+        is_artist?(name[:artist])
       end
       @user = TwitterUser.new(name: @name, handle: @screen_name, image_url: @image_url)
       @user.save
       @artists.each do |artist|
-        @user.songs.create(rdio_id: artist.foreign_ids[0].foreign_id)
+        @user.songs.create(rdio_id: artist[:artist].foreign_ids[0].foreign_id, referer_handle: artist[:handle])
       end
       friends = twitter.friends(params[:user_name])
       friends.take(10).each do |friend|

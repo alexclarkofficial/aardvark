@@ -32,16 +32,17 @@ class ApplicationController < ActionController::Base
     mentions = []
     @tweets.each do |tweet|
       tweet.user_mentions.each do |mention|
-        mentions << mention.attrs[:name]
+        mentions << { name: mention.attrs[:name], handle: mention.attrs[:screen_name] }
       end
     end
     mentions.uniq
   end
 
   def possible_artists(names)
-    names[0..149].map do |artist|
-      Echowrap.artist_search(name: artist, bucket: 'id:rdio-US').first
-    end.compact
+    candidates = names[0..149].map do |artist|
+      { artist: Echowrap.artist_search(name: artist[:name], bucket: 'id:rdio-US').first, handle: artist[:handle] }
+    end
+    candidates.select { |i| !i[:artist].nil? }
   end
 
   def is_artist?(name)
