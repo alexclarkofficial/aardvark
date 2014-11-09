@@ -6,8 +6,8 @@ class StaticPagesController < ApplicationController
   end
 
   def handle
-    @user = TwitterUser.where(handle: params[:user_name])
-    if @user.empty?
+    @user = TwitterUser.where(handle: params[:user_name]).first
+    if @user.nil?
       twitter_call
       @artists = possible_artists(twitter_mentions).select do |name|
         is_artist?(name)
@@ -18,6 +18,7 @@ class StaticPagesController < ApplicationController
         @user.songs.create(rdio_id: artist.foreign_ids[0].foreign_id)
       end
     end
+    redirect_to @user
   end
 
   private
