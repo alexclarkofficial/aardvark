@@ -19,7 +19,7 @@ class StaticPagesController < ApplicationController
       @artists = @user.songs
     end
 
-    respond_with @artists
+    respond_with json: {hey: 'fuckyou'}
   end
 
   private
