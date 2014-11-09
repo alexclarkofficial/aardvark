@@ -1,12 +1,3 @@
-hey
-<% @search_results.each do |res| %>
-  <div><%= res.title %></div>
-<% end %>
-
-<br />
-<% @result.each do |tweet| %>
-  <% tweet.user_mentions.each do |mention| %>
-    <div><%= mention.attrs[:screen_name] %></div>
-  <% end %>
-  <br />
-<% end %>
+<%= @data.first.user.screen_name %>
+<%= @data.first.user.name %>
+<%= @data.first.user.profile_image_url %>
