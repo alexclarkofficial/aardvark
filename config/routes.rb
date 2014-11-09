@@ -1,5 +1,6 @@
 Aardvark::Application.routes.draw do
   get '/:user_name', to: 'twitter_users#show', defaults: { format: :json }
+  get '/', to: 'twitter_users#index', defaults: { format: :json }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

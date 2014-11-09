@@ -14,6 +14,18 @@ class TwitterUsersController < ApplicationController
         @user.songs.create(rdio_id: artist.foreign_ids[0].foreign_id)
       end
     end
+    @user.request_count += 1
+    @user.save
     respond_with @user
+  end
+
+  def index
+    @users = TwitterUser.take(20)
+    respond_with @users
+  end
+
+  def test
+    twitter_call
+    @data = @tweets.first
   end
 end
