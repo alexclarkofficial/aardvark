@@ -1,1 +1,3 @@
-<%= @data.user.methods %>
+<% @data.take(10).each do |friend| %>
+  <%= friend.screen_name %>
+<% end %>

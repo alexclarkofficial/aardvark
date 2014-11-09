@@ -4,7 +4,7 @@ class TwitterUsersController < ApplicationController
   def show
     @user = TwitterUser.find(:first, :conditions => ["lower(handle) = ?", params[:user_name].downcase])
     if @user.nil?
-      twitter_call
+      twitter_call(params[:user_name])
       @artists = possible_artists(twitter_mentions).select do |name|
         is_artist?(name)
       end
@@ -12,6 +12,10 @@ class TwitterUsersController < ApplicationController
       @user.save
       @artists.each do |artist|
         @user.songs.create(rdio_id: artist.foreign_ids[0].foreign_id)
+      end
+      friends = twitter.friends(params[:user_name])
+      friends.take(10).each do |friend|
+        @user.friends.create(name: friend.name, handle: friend.screen_name, image_url: friend.profile_image_url.to_s)
       end
     end
     @user.request_count += 1
@@ -25,7 +29,7 @@ class TwitterUsersController < ApplicationController
   end
 
   def test
-    twitter_call
-    @data = @tweets.first
+    twitter_call('vincestaples')
+    @data = twitter.friends('earlxsweat')
   end
 end

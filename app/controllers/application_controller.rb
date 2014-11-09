@@ -21,8 +21,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def twitter_call
-    @tweets = twitter.user_timeline(params[:user_name], { exclude_replies: true, count: 200 })
+  def twitter_call(name)
+    @tweets = twitter.user_timeline(name, { exclude_replies: true, count: 200 })
     @name = @tweets.first.user.name
     @screen_name = @tweets.first.user.screen_name
     @image_url = @tweets.first.user.profile_image_url.to_s
