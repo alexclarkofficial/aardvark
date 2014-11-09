@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
   before_action :echowrap
 
   def home
-    @data = twitter.user_timeline('alexanderhclark', { exclude_replies: true, count: 200 })
+    @data = Echowrap.artist_search(name: 'Vince Staples', bucket: 'id:rdio-US').first
   end
 
   def handle
@@ -14,6 +14,9 @@ class StaticPagesController < ApplicationController
       end
       @user = TwitterUser.new(name: @name, handle: @screen_name, image_url: @image_url)
       @user.save
+      @artists.each do |artist|
+        @user.songs.create(rdio_id: artist.foreign_ids[0].foreign_id)
+      end
     end
   end
 
@@ -33,7 +36,7 @@ class StaticPagesController < ApplicationController
         mentions << mention.attrs[:name]
       end
     end
-    mentions
+    mentions.uniq
   end
 
   def possible_artists(names)
