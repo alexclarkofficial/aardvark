@@ -6,7 +6,6 @@ class StaticPagesController < ApplicationController
     @search_results = Echowrap.song_search(artist: 'Daft Punk')
   end
 
-
   def handle
     @user = TwitterUser.where(handle: params[:user_name])
     if @user.empty?
@@ -19,7 +18,10 @@ class StaticPagesController < ApplicationController
       @artists = @user.songs
     end
 
+    respond_with @artists
+
     respond_with json: {hey: 'fuckyou'}
+
   end
 
   private
